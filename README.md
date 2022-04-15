@@ -2,7 +2,7 @@
 
 ERC721Lendable is an extension to the ERC721 standard that allows token owners to trustlessly lend their tokens to others for a fixed duration. 
 
-** NOTE: The code in this repository has not been audited and very likely contains bugs that will cause loss of funds if used as-is. **
+**NOTE: The code in this repository has not been audited and very likely contains bugs that will cause loss of funds if used as-is.**
 
 
 # How it works
