@@ -12,7 +12,7 @@ interface IERC721Lendable {
     /**
      * @dev Emitted when an active loan for `tokenId` is reclaimed from `borrower` to `lender`.
      */
-    event LoanReclaimed(address indexed lender, address indexed borrower, uint256 loanId);
+    event LoanReclaimed(address indexed lender, address indexed borrower, uint256 tokenId);
 
     /**
     * @dev structure of an ERC721Lendable token loan.
@@ -45,26 +45,38 @@ interface IERC721Lendable {
     function lendFrom(address lender, address borrower, uint256 tokenId, uint256 expiry) external;
 
     /**
-     * @dev Reclaims ownership of `tokenId` from `borrower` to `lender`.
+     * @dev Reclaims ownership of `tokenId` from current owner to `lender`.
      * 
-     *  The effect is to transfer ownership from `borrower` back to `lender`. After this function is called,
+     *  The effect is to transfer ownership from the current token borrower back to `lender`. After this function is called,
      *      subsequent calls to `ownerOf` for `tokenId` will return the lenders address, and token 
-     *      balances will be updated to reflect that `lender` is now in possession of `tokenId` and
-     *      that `borrower` is no longer in possession of `tokenId`.
+     *      balances will be updated to reflect that `lender` is now in possession of `tokenId`.
      *
      * Requirements:
      *
      * - `lender` cannot be the zero address.
-     * - `borrower` cannot be the zero address.
      * - `tokenId` token must be owned by (or be on loan to) `lender`.
      * - `tokenId` token must not be on loan to `borrower` (to prevent circular loans).
      *
      * Emits a {LoanReclaimed} event.
      */
-    function reclaimLoanForToken(address lender, address borrower, uint256 tokenId) external;
+    function reclaimLoanForToken(address lender, uint256 tokenId) external;
 
     /**
      * @dev Returns true if `tokenId` is currently on loan to `borrower`, false otherwise.
      */
     function isTokenOnLoanTo(address borrower, uint256 tokenId) external view returns (bool);
+
+    /**
+     * @dev Returns the expiry for `lender`s loan of `tokenId`.
+     *
+     * Requirements:
+     *
+     * - `tokenId` token must exist and be on loan to lender.
+     */
+    function getLoanExpiry(address lender, uint256 tokenId) external view returns (uint256);
+
+    /**
+     * @dev Returns the currnet number of outstanding loans for `tokenId`.
+     */
+    function numOutstandingLoans(uint256 tokenId) external view returns (uint256);
 }
