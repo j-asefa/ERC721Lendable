@@ -4,7 +4,7 @@ ERC721Lendable is an extension to the ERC721 standard that allows token owners t
 
 `ERC721Lendable` token holders can transfer ownership of their assets to others for a fixed duration. Once the duration is over, lenders can reclaim ownership of their tokens. This functionality opens up several interesting use cases and provides additional value to NFTs that follow this implementation.
 
-**NOTE: There are currently no tests in this repository nd the code has not been audited. It is very likely that there are bugs in the code that will cause loss of funds if used as-is.**
+**NOTE: This code has not been audited. It is very likely that there are bugs in the code that will cause loss of funds if used as-is.**
 
 # How it works
 
